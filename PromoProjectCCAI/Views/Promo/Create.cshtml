@@ -1,0 +1,116 @@
+﻿@model PromoProjectCCAI.Dtos.PromoDto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Promotion</h1>
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PromoID" class="control-label"></label>
+                <input asp-for="PromoID" class="form-control" disabled />
+                <span asp-validation-for="PromoID" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PromoDescription" class="control-label"></label>
+                <input asp-for="PromoDescription" class="form-control" />
+                <span asp-validation-for="PromoDescription" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="PromoType" class="control-label"></label>
+                <select asp-for="PromoType" class="form-control" asp-items="Model.PromoTypeList">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="ValueType" class="control-label"></label>
+                <select asp-for="ValueType" class="form-control" asp-items="Model.ValueTypeList">
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label asp-for="Value" class="control-label"></label>
+            <input asp-for="Value" class="form-control" />
+            <span asp-validation-for="Value" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Item" class="control-label"></label>
+                <input asp-for="Item" type="file" class="form-control" accept="text/plain">
+                <span asp-validation-for="Item"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <label asp-for="Stores" class="control-label"></label>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>ALL</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Stores.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(model => model.Stores[i].IsChecked)
+                                @Html.HiddenFor(model => model.Stores[i].StoreID)
+                                @Html.HiddenFor(model => model.Stores[i].StoreName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => modelItem.Stores[i].StoreID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => modelItem.Stores[i].StoreName)
+                            </td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-success" />
+        <input type="reset" value="Clear" class="btn btn-danger" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
