@@ -100,6 +100,7 @@ namespace PromoProjectCCAI.Services.Promos
             }
             print.AppendLine("FTAIL||||");
 
+            //save file on specific folder
             var fileByte = Encoding.UTF8.GetBytes(print.ToString());
             File.WriteAllBytes("../PromoProjectCCAI/Content/Download/" + promo.PromoID + ".txt", fileByte);
         }

@@ -36,7 +36,6 @@ namespace PromoProjectCCAI.Controllers
             try
             {
                 int countPromo = await _servicePromo.GetCountPromosAsync();
-                //request.PromoId = $"P{DateTime.UtcNow.ToString("yyyyMMdd")}{String.Format("{0:D4}", promoCount + 1)}";
                 promoDto.PromoID = "P" + DateTime.UtcNow.ToString("yyyyMMdd") + countPromo + 1.ToString().PadLeft(4, '0');
 
                 //concatenate StoreID
